@@ -45,3 +45,11 @@ Ex: ✨ Adiciona alguma coisa muito legal
 
 Basta baixar a extensão do vscode (ou olhar no site mesmo) e conferir qual emoji se encaixa melhor nos seus commits.
 
+<style>
+  
+img[alt="PipeSheet logo"] { 
+  display: block;
+  margin: 0 auto;
+}
+  
+ </style>
