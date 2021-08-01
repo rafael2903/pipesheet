@@ -1,4 +1,4 @@
-<img src="src/assets/logo.svg" alt="drawing" width="300"/>
+<img src="src/assets/logo.svg" alt="PipeSheet logo" width="300"/>
 
 
 O Pipesheet é um app construído com [Next.js](https://nextjs.org/) para criar integrações entre pipes e planilhas do Google.
