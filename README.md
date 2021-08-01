@@ -1,3 +1,4 @@
+<br />
 <p align="center">
   <img src="src/assets/logo.svg" alt="PipeSheet logo" width="300"/>
 </p>
@@ -6,7 +7,7 @@
 
 O Pipesheet é um app construído com [Next.js](https://nextjs.org/) para criar integrações entre pipes e planilhas do Google.
 
-Com ele podemos ter os dados de um pipe em uma planilha, que é atualizada em tempo real com qualquer mudança no feita no pipe.
+Com ele é possível ter os dados dos seus pipes em planilhas, que são atualizadas automáticamente quando há alguma mudança nos pipes.
 
 [API Reference]() - Ainda em construção
 
