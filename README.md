@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 🔗Pipesheet
 
-## Getting Started
+O Pipesheet é um app construído com [Next.js](https://nextjs.org/) para criar integrações entre pipes e planilhas da Google.
 
-First, run the development server:
+[API Reference]() - Ainda em construção
+
+## 🚀Rodando o projeto localmente
+
+Basta executar os seguintes comandos:
 
 ```bash
-npm run dev
-# or
-yarn dev
+yarn install # ou npm install
+yarn dev # ou npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Com isso o projeto deve estar rodando em https://localhost:3000.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🏷️Variáveis de ambiente
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+É preciso criar um arquivo `.env.local` para inserir as variáveis de ambiente.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`PERSONAL_ACCESS_TOKEN` - Este é o token obtido nesta [página](https://app.pipefy.com/tokens) do Pipefy.
 
-## Learn More
+## ✏️Contribuindo
 
-To learn more about Next.js, take a look at the following resources:
+### Branches
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+As branches seguem o seguinte formato: **tipo/nome_da_branch**. 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Ex: feat/get_pipe_route
 
-## Deploy on Vercel
+Os tipos podem ser:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- feat - Adiciona uma nova feature
+- fix - Consertar algum bug no código
+- chore - Adiciona ou modifica arquivos de configuração (.gitignore, jsconfig, etc)
+- docs - Adiciona ou modifica arquivos de documentaçao (README ...)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Commits
+
+Fazemos os commits seguindo os padrões do [gitmoji](https://gitmoji.dev/). No seguinte formato: **:emoji: Mensagem**
+
+Ex: ✨ Adiciona alguma coisa muito legal
+
+Basta baixar a extensão do vscode (ou olhar no site mesmo) e conferir qual emoji se encaixa melhor nos seus commits.
+
