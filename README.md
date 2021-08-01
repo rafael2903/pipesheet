@@ -1,10 +1,10 @@
-## 🔗Pipesheet
+## 🔗 Pipesheet
 
 O Pipesheet é um app construído com [Next.js](https://nextjs.org/) para criar integrações entre pipes e planilhas da Google.
 
 [API Reference]() - Ainda em construção
 
-## 🚀Rodando o projeto localmente
+## 🚀 Rodando o projeto localmente
 
 Basta executar os seguintes comandos:
 
@@ -15,13 +15,13 @@ yarn dev # ou npm run dev
 
 Com isso o projeto deve estar rodando em https://localhost:3000.
 
-## 🏷️Variáveis de ambiente
+## 🏷️ Variáveis de ambiente
 
 É preciso criar um arquivo `.env.local` para inserir as variáveis de ambiente.
 
 `PERSONAL_ACCESS_TOKEN` - Este é o token obtido nesta [página](https://app.pipefy.com/tokens) do Pipefy.
 
-## ✏️Contribuindo
+## ✏️ Contribuindo
 
 ### Branches
 
