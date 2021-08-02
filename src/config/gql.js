@@ -1,7 +1,11 @@
-export const endpoint = 'https://api.pipefy.com/graphql'
+import { GraphQLClient } from 'graphql-request'
 
-export const headers = {
+const endpoint = 'https://api.pipefy.com/graphql'
+
+const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  authorization: 'Bearer ' + process.env.PERSONAL_ACCESS_TOKEN,
+  authorization: 'Bearer ' + process.env.PIPEFY_PERSONAL_ACCESS_TOKEN,
 }
+
+export const client = new GraphQLClient(endpoint, { headers });

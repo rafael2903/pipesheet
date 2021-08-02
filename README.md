@@ -26,7 +26,7 @@ Com isso o projeto deve estar rodando em https://localhost:3000.
 
 É preciso criar um arquivo `.env.local` para inserir as variáveis de ambiente.
 
-`PERSONAL_ACCESS_TOKEN` - Este é o token obtido nesta [página](https://app.pipefy.com/tokens) do Pipefy.
+`PIPEFY_PERSONAL_ACCESS_TOKEN` - Este é o token obtido nesta [página](https://app.pipefy.com/tokens) do Pipefy.
 
 ## ✏️ Contribuindo
 
