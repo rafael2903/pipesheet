@@ -5,16 +5,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .main {
-  padding: 5rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  .description {
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1.5rem;
+    margin: 0;
+  }
 }
 
 .footer {
@@ -35,8 +38,9 @@
 
 .title {
   margin: 0;
-  line-height: 1.15;
+  line-height: 0;
   font-size: 4rem;
+  text-align: center;
 
   a {
     color: #0070f3;
@@ -48,17 +52,6 @@
   a:active {
     text-decoration: underline;
   }
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
-  margin: 0;
 }
 
 .code {
