@@ -28,9 +28,11 @@ const handler = nc()
         const spreadsheet = await fetchDatabase();
         const sheet = spreadsheet.sheetsByTitle['Integrations'];
 
-        sheet.addRow({ id: integrationId, pipeId,  spreadsheetId, sheetId, webhookId });
+        const integration = { id: integrationId, pipeId,  spreadsheetId, sheetId, webhookId };
 
-        res.status(200).json({ success: true });
+        sheet.addRow(integration);
+
+        res.status(200).json({ integration });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
