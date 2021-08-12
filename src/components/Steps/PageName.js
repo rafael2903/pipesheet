@@ -12,7 +12,7 @@ export default function PipeName({ nextStep }) {
   const [selected, setSelected] = useState('oi')
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex w-80 flex-col justify-between">
       <h2 className="text-xl my-2">Escolha qual página receberá os dados</h2>
       <Select
         options={data}

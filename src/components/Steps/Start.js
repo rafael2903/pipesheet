@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function Start({ nextStep }) {
   return (
-    <div className="flex w-full flex-col justify-between">
+    <div className="flex w-80 flex-col justify-between">
       <Image
         className=""
         src="/logo.svg"

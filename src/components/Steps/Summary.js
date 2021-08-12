@@ -3,7 +3,7 @@ import { TextInput, Button } from 'components'
 
 export default function Summary() {
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex w-80 flex-col justify-between">
       <h2 className="text-xl my-2">
         O pipe tanana será conectado com a planilha tanana2. Qualquer alteração
         feita no pipe refletirá na planilha{' '}
