@@ -1,14 +1,25 @@
 import { header, button, container } from 'styles/Steps.module.scss'
+import { Button } from 'components'
+import Image from 'next/image'
 
 export default function Start({ nextStep }) {
   return (
-    <div className={container}>
-      <h2 className={header}>
+    <div className="flex w-full flex-col justify-between">
+      <Image
+        className=""
+        src="/logo.svg"
+        alt="PipeSheet Logo"
+        width={180}
+        height={80}
+      />
+      <h2 className="text-xl my-4">
         Tenha os dados dos seus pipes em suas planilhas!
       </h2>
-      <button className={button} onClick={nextStep}>
-        Começar
-      </button>
+
+      <div className="flex w-full justify-between">
+        <Button variation="red">Deletar</Button>
+        <Button onClick={nextStep}>Criar</Button>
+      </div>
     </div>
   )
 }

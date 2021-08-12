@@ -20,7 +20,7 @@ import {
 
 export default function Home() {
   return (
-    <div className={container}>
+    <div className="flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden">
       <Head>
         <title>PipeSheet</title>
         <meta
@@ -30,15 +30,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={main}>
-        <Image
-          className={title}
-          src="/logo.svg"
-          alt="PipeSheet Logo"
-          width={101}
-          height={80}
-        />
-
+      <main className="flex flex-col text-center h-72 max-w-sm min-w-sm px-2 sm:px-0">
         <StepWizard>
           <Start />
           <PipeName />

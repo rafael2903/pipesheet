@@ -1,13 +1,11 @@
-import { container, base_input, header, button } from 'styles/Steps.module.scss'
+import { Button, TextInput } from 'components'
 
 export default function SpreadsheetId({ nextStep }) {
   return (
-    <div className={container}>
-      <h2 className={header}>Digite o ID da planilha a ser conectada</h2>
-      <input className={base_input} type="text" />
-      <button className={button} onClick={nextStep}>
-        Continuar
-      </button>
+    <div className="flex flex-col justify-between">
+      <h2 className="text-xl my-2">Escolha qual planilha receberá os dados</h2>
+      <TextInput placeholder="Id da planilha" />
+      <Button onClick={nextStep}>Continuar</Button>
     </div>
   )
 }
