@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <img src="src/assets/logo.svg" alt="PipeSheet logo" width="300"/>
+  <img src="public/logo.svg" alt="PipeSheet logo" width="300"/>
 </p>
 
 
