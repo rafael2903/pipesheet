@@ -1,0 +1,22 @@
+.container {
+  @apply my-4;
+}
+
+.input {
+  @apply border border-gray-300 rounded-lg py-2 outline-none w-full px-4;
+}
+
+.options {
+  @apply mt-2 border border-gray-300 rounded-lg;
+}
+.option {
+  @apply w-full hover:bg-gray-200;
+}
+
+/* .has-focus {
+  @apply bg-blue-400;
+} */
+
+.is-highlighted {
+  @apply bg-gray-700;
+}

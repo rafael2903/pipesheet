@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
     "eslint-import-resolver-typescript": "^2.4.0",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^83.0.0",
@@ -18,10 +19,16 @@
     "next": "11.0.1",
     "next-connect": "^0.10.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-select-search": "^3.0.8",
+    "react-step-wizard": "^5.3.9",
+    "sass": "^1.37.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.3.1",
     "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.7"
   }
 }
