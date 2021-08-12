@@ -16,7 +16,7 @@
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
     "nanoid": "^3.1.23",
-    "next": "11.0.1",
+    "next": "^11.1.0",
     "next-connect": "^0.10.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
