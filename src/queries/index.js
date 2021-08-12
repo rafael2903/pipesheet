@@ -11,3 +11,14 @@ export const getPipe = gql`
     }
   }
 `
+
+export const getAllPipes = gql`
+  query ($organizationId: ID!) {
+    organization(id: $organizationId) {
+      pipes {
+        id
+        name
+      }
+    }
+  }
+`
