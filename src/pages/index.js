@@ -16,14 +16,14 @@ export default function Home() {
         <meta property="og:url" content="https://pipesheet.vercel.app/">
         <meta property="og:title" content="PipeSheet">
         <meta property="og:description" content="Integre seus pipes e planilhas">
-        <meta property="og:image" content="">
+        <meta property="og:image" content="/cover.png">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content="https://pipesheet.vercel.app/">
         <meta property="twitter:title" content="PipeSheet">
         <meta property="twitter:description" content="Integre seus pipes e planilhas">
-        <meta property="twitter:image" content="">
+        <meta property="twitter:image" content="/cover.png">
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
