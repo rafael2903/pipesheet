@@ -1,22 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import StepWizard from 'react-step-wizard'
-import {
-  container,
-  main,
-  title,
-  description,
-  footer,
-  logo,
-} from 'styles/Home.module.scss'
-import {
-  PageName,
-  PipeName,
-  SpreadsheetId,
-  Start,
-  Summary,
-  Nav,
-} from 'components/Steps'
+import { PageName, PipeName, SpreadsheetId, Start, Summary } from 'pages/_steps'
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
-import { header, button, container } from 'styles/Steps.module.scss'
 import { Button } from 'components'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Start({ nextStep }) {
   return (
@@ -16,10 +16,13 @@ export default function Start({ nextStep }) {
         Tenha os dados dos seus pipes em suas planilhas!
       </h2>
 
-      <div className="flex w-full justify-between">
-        <Button variation="red">Deletar</Button>
-        <Button onClick={nextStep}>Criar</Button>
-      </div>
+      <Button onClick={nextStep}>Criar</Button>
+      <p className="text-xs">
+        Deseja deletar uma integração já criada?{' '}
+        <Link href="/integrations/delete">
+          <a className="text-blue-600 hover:underline">Clique aqui.</a>
+        </Link>
+      </p>
     </div>
   )
 }
