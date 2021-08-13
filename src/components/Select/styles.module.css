@@ -7,7 +7,7 @@
 }
 
 .options {
-  @apply mt-2 border border-gray-300 rounded-lg;
+  @apply mt-2 border border-gray-300 rounded-lg overflow-y-scroll max-h-40;
 }
 .option {
   @apply w-full hover:bg-gray-200;
