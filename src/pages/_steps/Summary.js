@@ -5,7 +5,7 @@ export default function Summary() {
   const [integrationName, setIntegrationName] = useState('')
 
   return (
-    <div className="flex w-80 flex-col justify-between">
+    <div className="flex w-80 flex-col justify-between items-center">
       <h2 className="text-xl my-2">
         O pipe tanana será conectado com a planilha tanana2. Qualquer alteração
         feita no pipe refletirá na planilha{' '}
@@ -15,7 +15,7 @@ export default function Summary() {
         onChange={setIntegrationName}
         placeholder="Dê um nome a sua integração"
       />
-      <Button>Ativar sincronização</Button>
+      <Button>Ativar integração</Button>
     </div>
   )
 }

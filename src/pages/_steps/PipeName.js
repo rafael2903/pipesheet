@@ -12,7 +12,7 @@ export default function PipeName({ nextStep }) {
 
   async function getAllPipes() {
     try {
-      const { data } = await api.get('/api/pipes')
+      const { data } = await api.get('/pipes')
       setPipes(data.pipes.map((pipe) => ({ name: pipe.name, value: pipe.id })))
     } catch (error) {
       console.log('erro:', error.message)
@@ -20,8 +20,8 @@ export default function PipeName({ nextStep }) {
   }
 
   return (
-    <div className="flex w-80 flex-col justify-between">
-      <h2 className="text-xl my-2">Escolha qual pipe deseja utilizar</h2>
+    <div className="flex w-80 flex-col justify-between items-center">
+      <h2 className="text-xl my-2">Escolha de qual pipe você deseja obter os dados</h2>
       <Select
         options={pipes}
         value={pipeId}

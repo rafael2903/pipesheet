@@ -5,7 +5,7 @@ export default function SpreadsheetId({ nextStep }) {
   const [spreadsheetId, setSpreadsheetId] = useState('')
 
   return (
-    <div className="flex w-80 flex-col justify-between">
+    <div className="flex w-80 flex-col justify-between items-center">
       <h2 className="text-xl my-2">Escolha qual planilha receberá os dados</h2>
       <TextInput
         value={spreadsheetId}

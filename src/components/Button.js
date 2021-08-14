@@ -6,7 +6,7 @@ export default function Button({ variation = 'blue', ...rest }) {
 
   return (
     <button
-      className={`${variations[variation]} text-white text-lg rounded-lg py-2 px-4`}
+      className={`${variations[variation]} text-white text-lg w-full rounded-lg py-2 px-4`}
       {...rest}
     />
   )

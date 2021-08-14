@@ -1,41 +1,31 @@
 import nc from 'next-connect';
-import { nanoid } from 'nanoid';
-import { client } from 'config/gql'
-import { createWebhookMutation } from 'mutations';
-import { fetchDatabase } from 'config/spreadsheet';
-
-
-async function createWebhook(pipeId, integrationId) {
-
-    const url = `http://localhost:3000/api/integrations/${integrationId}`;
-
-    const response = await client.request(createWebhookMutation, { pipeId, url });
-    const webhookId = response.createWebhook.webhook.id;
-
-    return webhookId;
-}
+import Integrations from 'models/integrations';
 
 const handler = nc()
-    .post(async (req, res) => {
+  .post(async (req, res) => {
 
-    const { pipeId,  spreadsheetId, sheetId } = req.body;
-    const integrationId = nanoid();
+    const { pipeId, spreadsheetId, sheetId, title } = req.body;
 
     try {
+      const integration = await Integrations.create({
+        pipeId,
+        spreadsheetId,
+        sheetId,
+        title,
+      });
 
-        const webhookId = await createWebhook(pipeId, integrationId);
-
-        const spreadsheet = await fetchDatabase();
-        const sheet = spreadsheet.sheetsByTitle['Integrations'];
-
-        const integration = { id: integrationId, pipeId,  spreadsheetId, sheetId, webhookId };
-
-        sheet.addRow(integration);
-
-        res.status(200).json({ integration });
+      res.status(200).json({ integration });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-});
+  })
+  .get(async (req, res) => {
+    try {
+      const integrations = await Integrations.all();
+      res.status(200).json({ integrations });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 export default handler;
