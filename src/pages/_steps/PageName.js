@@ -13,7 +13,7 @@ export default function PageName({ nextStep }) {
 
   async function getPages() {
     try {
-      const { data } = await api.get(`/api/spreadsheets/:id`)
+      const { data } = await api.get(`/spreadsheets/:id`)
       setSheets(
         data.sheets.map((sheet) => ({
           name: sheet.title,
@@ -27,8 +27,8 @@ export default function PageName({ nextStep }) {
   }
 
   return (
-    <div className="flex w-80 flex-col justify-between">
-      <h2 className="text-xl my-2">Escolha qual página receberá os dados</h2>
+    <div className="flex w-80 flex-col justify-between items-center">
+      <h2 className="text-xl my-2">Escolha qual página da planilha receberá os dados</h2>
       <Select
         options={sheets}
         value={sheetId}
