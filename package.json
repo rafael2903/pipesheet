@@ -20,10 +20,12 @@
     "next": "^11.1.0",
     "next-connect": "^0.10.1",
     "react": "17.0.2",
+    "react-data-table-component": "^6.11.8",
     "react-dom": "17.0.2",
     "react-select-search": "^3.0.8",
     "react-step-wizard": "^5.3.9",
-    "sass": "^1.37.0"
+    "sass": "^1.37.0",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",
