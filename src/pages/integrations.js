@@ -5,19 +5,31 @@ import {  useState } from 'react';
 
 export default function IntegrationsPage({ integrations }) {
   const [data, setData] = useState(integrations);
-  const [loading, setLoading] = useState(false);
+  
+  const Button = ({ id }) => {
+    const [loading, setLoading] = useState(false);
 
-  async function deleteIntegration(integrationId) {
-    setLoading(true);
-    try {
-      await api.delete(`/integrations/${integrationId}`);
-      const { data } = await api.get('/integrations');
-      setData(data.integrations);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-    };
+    async function deleteIntegration(integrationId) {
+      setLoading(true);
+      try {
+        await api.delete(`/integrations/${integrationId}`);
+        const { data } = await api.get('/integrations');
+        setData(data.integrations);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      };
+    }
+
+    return (
+      <button
+          style={{ backgroundColor: 'red', color: 'white', padding: 10 }}
+          onClick={() => deleteIntegration(id)}
+        >
+          {loading ? 'Excluindo...' : 'X'}
+      </button>
+    );
   }
 
   const columns = [
@@ -36,14 +48,7 @@ export default function IntegrationsPage({ integrations }) {
     {
       name: '',
       selector: 'id',
-      cell: ({ id }) => (
-        <button
-          style={{ backgroundColor: 'red', color: 'white', padding: 10 }}
-          onClick={() => deleteIntegration(id)}
-        >
-          {loading ? 'Loading...' : 'X'}
-        </button>
-      ),
+      cell: Button
     },
   ];
 
