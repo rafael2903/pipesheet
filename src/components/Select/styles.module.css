@@ -7,10 +7,10 @@
 }
 
 .options {
-  @apply mt-2 border border-gray-300 rounded-lg overflow-y-scroll max-h-40;
+  @apply mt-2 border border-gray-300 rounded-lg overflow-y-scroll max-h-48 w-full bg-white absolute;
 }
 .option {
-  @apply w-full hover:bg-gray-200;
+  @apply w-full hover:bg-gray-200 py-1;
 }
 
 /* .has-focus {
