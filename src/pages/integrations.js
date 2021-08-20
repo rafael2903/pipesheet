@@ -1,60 +1,37 @@
 import DataTable from 'react-data-table-component';
 import Integrations from 'models/integrations';
-import api from 'config/api';
 import {  useState } from 'react';
-
+import { DeleteButton } from 'components';
 export default function IntegrationsPage({ integrations }) {
   const [data, setData] = useState(integrations);
   
-  const Button = ({ id }) => {
-    const [loading, setLoading] = useState(false);
-
-    async function deleteIntegration(integrationId) {
-      setLoading(true);
-      try {
-        await api.delete(`/integrations/${integrationId}`);
-        const { data } = await api.get('/integrations');
-        setData(data.integrations);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      };
-    }
-
-    return (
-      <button
-          style={{ backgroundColor: 'red', color: 'white', padding: 10 }}
-          onClick={() => deleteIntegration(id)}
-        >
-          {loading ? 'Excluindo...' : 'X'}
-      </button>
-    );
-  }
 
   const columns = [
     {
-      name: 'Title',
-      selector: 'title',
+      name: 'Título da integração',
+      selector: row => <div style={{ whiteSpace: 'normal', textAlign: 'start' }}>{row.title}</div>,
     },
     {
-      name: 'Pipe Id',
+      name: 'Id do pipe',
       selector: 'pipeId',
     },
     {
-      name: 'Spreadsheet Id',
-      selector: 'spreadsheetId',
+      name: 'Id da planilha',
+      selector: row => <div style={{ whiteSpace: 'normal', textAlign: 'start' }}>{row.spreadsheetId}</div>,
     },
     {
       name: '',
       selector: 'id',
-      cell: Button
+      cell: ({ id }) => DeleteButton(id, setData)
     },
   ];
 
   return (
-    <div>
-      <DataTable title='Integrações' columns={columns} data={data} />
+    <div className=" container mx-auto mt-20">
+      <div className="flex flex-col  text-center items-center justify-center h-auto max-w-full min-w-lg px-2 sm:px-0">
+        <h1 className="text-4xl mb-5">Integrações</h1>
+        <DataTable columns={columns} data={data} />
+      </div>
     </div>
   );
 }
