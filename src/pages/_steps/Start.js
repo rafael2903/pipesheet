@@ -4,7 +4,6 @@ import Link from 'next/link'
 export default function Start({ nextStep }) {
   return (
     <div className="flex flex-col justify-between items-center">
-
       <h2 className="text-xl text-gray-500 mt-2 mb-6">
         Tenha os dados dos seus pipes em suas planilhas!
       </h2>

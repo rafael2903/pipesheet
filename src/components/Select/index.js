@@ -19,17 +19,22 @@ export default function Select({ ...rest }) {
   }
 
   return (
-    <SelectSearch
-      search
-      options={[
-        { value: 'hamburger', name: 'Hamburger' },
-        { value: 'fries', name: 'Fries' },
-        { value: 'milkshake', name: 'Milkshake' },
-      ]}
-      filterOptions={fuzzySearch}
-      emptyMessage="Não encontrado"
-      className={(key) => styles[key]}
-      {...rest}
-    />
+    <div className='w-full'>
+      <span className='absolute right-2 top-1/2 transform rotate-90 text-gray-500 font-bold'>
+        {'>'}
+      </span>
+      <SelectSearch
+        search
+        options={[
+          { value: 'hamburger', name: 'Hamburger' },
+          { value: 'fries', name: 'Fries' },
+          { value: 'milkshake', name: 'Milkshake' },
+        ]}
+        filterOptions={fuzzySearch}
+        emptyMessage='Não encontrado'
+        className={(key) => styles[key]}
+        {...rest}
+      />
+    </div>
   )
 }

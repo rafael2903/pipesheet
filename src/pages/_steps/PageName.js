@@ -1,41 +1,50 @@
+import { useEffect, useState } from 'react'
 import { Select, Button } from 'components'
 import api from 'config/api'
-import { useEffect, useState } from 'react'
 
-export default function PageName({ nextStep }) {
+export default function PageName({ nextStep, setData, data }) {
   const [sheetId, setSheetId] = useState('')
-  const [sheetTitle, setSheetTitle] = useState('')
   const [sheets, setSheets] = useState([])
+  const { spreadsheetId } = data
 
   useEffect(() => {
-    getPages()
-  }, [])
-
-  async function getPages() {
-    try {
-      const { data } = await api.get(`/spreadsheets/:id`)
-      setSheets(
-        data.sheets.map((sheet) => ({
-          name: sheet.title,
-          value: sheet.sheetId,
-        }))
-      )
-      setSheetTitle(data.title)
-    } catch (error) {
-      console.log(error)
+    async function getPages() {
+      try {
+        const { data } = await api.get(`/spreadsheets/${spreadsheetId}`)
+        setSheets(
+          data.sheets.map((sheet) => ({
+            name: sheet.title,
+            value: sheet.sheetId,
+          }))
+        )
+      } catch (error) {
+        console.log(error)
+      }
     }
+    getPages()
+  }, [spreadsheetId])
+
+  function goToNextStep(e) {
+    e.preventDefault()
+    setData((prev) => ({ ...prev, sheetId }))
+    nextStep()
   }
 
   return (
-    <div className="flex w-80 flex-col justify-between items-center">
-      <h2 className="text-xl my-2">Escolha qual página da planilha receberá os dados</h2>
+    <form
+      onSubmit={goToNextStep}
+      className='flex w-80 flex-col justify-between items-center'
+    >
+      <h2 className='text-xl my-2'>
+        Escolha qual página da planilha receberá os dados
+      </h2>
       <Select
         options={sheets}
         value={sheetId}
         onChange={setSheetId}
-        placeholder="Selecione sua página"
+        placeholder='Selecione sua página'
       />
-      <Button onClick={nextStep}>Continuar</Button>
-    </div>
+      <Button type='submit'>Continuar</Button>
+    </form>
   )
 }

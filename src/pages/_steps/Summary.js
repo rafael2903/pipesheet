@@ -1,21 +1,65 @@
-import { TextInput, Button } from 'components'
 import { useState } from 'react'
+import Lottie from 'react-lottie'
+import { TextInput, Button } from 'components'
+import loading from 'assets/lotties/loading.json'
+import api from 'config/api'
 
-export default function Summary() {
+export default function Summary({ data, setData, goToStep }) {
   const [integrationName, setIntegrationName] = useState('')
+  const { pipeId, sheetId, spreadsheetId } = data
+  const [isLoading, setIsLoading] = useState(false)
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loading,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+
+  async function createIntegration(e) {
+    e.preventDefault()
+    setIsLoading(true)
+    try {
+      const data = await api.post('/integrations', {
+        pipeId,
+        sheetId,
+        spreadsheetId,
+        title: integrationName,
+      })
+      alert('Integração criada com sucesso!')
+      setData({})
+      goToStep(1)
+    } catch (error) {
+      alert('Houve um erro ao criar integração. Tente novamente.')
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
-    <div className="flex w-80 flex-col justify-between items-center">
-      <h2 className="text-xl my-2">
-        O pipe tanana será conectado com a planilha tanana2. Qualquer alteração
-        feita no pipe refletirá na planilha{' '}
+    <form
+      onSubmit={createIntegration}
+      className='flex w-80 flex-col justify-between items-center'
+    >
+      <h2 className='text-xl my-2'>
+        O pipe escolhido será sincronizado com a planilha. Qualquer alteração
+        feita no pipe refletirá na planilha.
       </h2>
       <TextInput
         value={integrationName}
-        onChange={setIntegrationName}
-        placeholder="Dê um nome a sua integração"
+        onChange={(e) => setIntegrationName(e.target.value)}
+        placeholder='Dê um nome a sua integração'
       />
-      <Button>Ativar integração</Button>
-    </div>
+      <Button type='submit' disabled={isLoading} onClick={createIntegration}>
+        {isLoading ? (
+          <Lottie options={defaultOptions} height={44} width={44} style />
+        ) : (
+          'Ativar integração'
+        )}
+      </Button>
+    </form>
   )
 }

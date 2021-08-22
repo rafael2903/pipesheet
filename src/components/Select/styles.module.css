@@ -7,8 +7,22 @@
 }
 
 .options {
-  @apply mt-2 border border-gray-300 rounded-lg overflow-y-scroll max-h-40;
+  @apply mt-2 border border-gray-300 rounded-lg
+  overflow-y-scroll max-h-40 absolute bg-gray-100 w-full;
 }
+
+.options::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.options::-webkit-scrollbar-track {
+  @apply bg-gray-200  rounded-lg;
+}
+
+.options::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 hover:bg-gray-400 rounded-md;
+}
+
 .option {
   @apply w-full hover:bg-gray-200;
 }
