@@ -14,7 +14,9 @@ export default function SpreadsheetId({ nextStep, setData }) {
       onSubmit={goToNextStep}
       className='flex w-80 flex-col justify-between items-center'
     >
-      <h2 className='text-xl my-2'>Escolha qual planilha receberá os dados</h2>
+      <h2 className='text-xl my-2 text-gray-700'>
+        Escolha qual planilha receberá os dados
+      </h2>
       <TextInput
         value={spreadsheetId}
         onChange={(e) => setSpreadsheetId(e.target.value)}

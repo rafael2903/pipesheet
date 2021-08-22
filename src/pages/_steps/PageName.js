@@ -35,7 +35,7 @@ export default function PageName({ nextStep, setData, data }) {
       onSubmit={goToNextStep}
       className='flex w-80 flex-col justify-between items-center'
     >
-      <h2 className='text-xl my-2'>
+      <h2 className='text-xl my-2 text-gray-700'>
         Escolha qual página da planilha receberá os dados
       </h2>
       <Select

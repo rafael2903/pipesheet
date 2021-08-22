@@ -1,6 +1,13 @@
 import Head from 'next/head'
 import StepWizard from 'react-step-wizard'
-import { PageName, PipeName, SpreadsheetId, Start, Summary } from 'pages/_steps'
+import {
+  Nav,
+  PageName,
+  PipeName,
+  SpreadsheetId,
+  Start,
+  Summary,
+} from 'pages/_steps'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
@@ -39,16 +46,16 @@ export default function Home() {
       </Head>
 
       <main className='flex flex-col text-center items-center h-96 max-w-sm min-w-sm px-2 sm:px-0'>
-        <div className='h-40'>
+        <div className=''>
           <Image
             src='/logo.svg'
             alt='PipeSheet Logo'
             width={400}
-            height={200}
+            height={120}
           />
         </div>
 
-        <StepWizard>
+        <StepWizard nav={<Nav />}>
           <Start />
           <PipeName setData={setData} />
           <SpreadsheetId setData={setData} />

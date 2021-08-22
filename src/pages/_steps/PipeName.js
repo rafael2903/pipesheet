@@ -31,7 +31,7 @@ export default function PipeName({ nextStep, setData }) {
       onSubmit={goToNextStep}
       className='flex w-80 flex-col justify-between items-center'
     >
-      <h2 className='text-xl my-2'>
+      <h2 className='text-xl my-2 text-gray-700'>
         Escolha de qual pipe você deseja obter os dados
       </h2>
 
