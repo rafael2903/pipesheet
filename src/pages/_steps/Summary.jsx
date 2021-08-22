@@ -3,6 +3,7 @@ import Lottie from 'react-lottie'
 import { TextInput, Button } from 'components'
 import loading from 'assets/lotties/loading.json'
 import api from 'config/api'
+import notyf from 'config/notyf'
 
 export default function Summary({ data, setData, goToStep }) {
   const [integrationName, setIntegrationName] = useState('')
@@ -28,12 +29,11 @@ export default function Summary({ data, setData, goToStep }) {
         spreadsheetId,
         title: integrationName,
       })
-      alert('Integração criada com sucesso!')
       setData({})
       goToStep(1)
+      notyf.success('Integração criada com sucesso!')
     } catch (error) {
-      alert('Houve um erro ao criar integração. Tente novamente.')
-      console.log(error)
+      notyf.error('Houve um erro ao criar a integração. ')
     } finally {
       setIsLoading(false)
     }
