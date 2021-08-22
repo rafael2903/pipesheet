@@ -24,7 +24,7 @@
 }
 
 .option {
-  @apply w-full hover:bg-gray-200;
+  @apply w-full hover:bg-gray-200 py-1;
 }
 
 /* .has-focus {

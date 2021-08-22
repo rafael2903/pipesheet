@@ -1,4 +1,6 @@
 import Button from './Button'
 import Select from './Select'
 import TextInput from './TextInput'
-export { Button, Select, TextInput }
+import DeleteButton from './DeleteButton'
+
+export { Button, DeleteButton, Select, TextInput }
