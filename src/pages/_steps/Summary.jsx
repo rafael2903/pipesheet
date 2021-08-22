@@ -45,8 +45,7 @@ export default function Summary({ data, setData, goToStep }) {
       className='flex w-80 flex-col justify-between items-center'
     >
       <h2 className='text-xl my-2 text-gray-700'>
-        O pipe escolhido será sincronizado com a planilha. Qualquer alteração
-        feita no pipe refletirá na planilha.
+        Os dados do pipe serão sincronizados na planilha
       </h2>
       <TextInput
         value={integrationName}

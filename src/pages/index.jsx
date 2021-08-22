@@ -55,7 +55,10 @@ export default function Home() {
           />
         </div>
 
-        <StepWizard nav={<Nav />}>
+        <StepWizard
+          className='flex flex-col-reverse justify-between h-3/5'
+          nav={<Nav />}
+        >
           <Start />
           <PipeName setData={setData} />
           <SpreadsheetId setData={setData} />
