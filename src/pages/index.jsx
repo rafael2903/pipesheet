@@ -14,10 +14,6 @@ import { useState, useEffect } from 'react'
 export default function Home() {
   const [data, setData] = useState({})
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   return (
     <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden'>
       <Head>
