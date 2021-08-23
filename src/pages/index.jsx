@@ -7,7 +7,7 @@ import {
   SpreadsheetId,
   Start,
   Summary,
-} from 'pages/_steps'
+} from 'components/Steps'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
