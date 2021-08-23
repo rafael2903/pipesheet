@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react'
 
 export default function Home() {
   const [data, setData] = useState({})
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
 
   return (
     <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden'>
