@@ -7,10 +7,10 @@ on:
       - develop
 
 jobs:
-  vercel: 
+  vercel:
     runs-on: ubuntu-latest
-    name: "Deploy front-end"
-    
+    name: 'Deploy front-end'
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -18,7 +18,7 @@ jobs:
           node-version: '14'
           registry-url: https://registry.npmjs.org/
 
-        - name: "Deploy to Vercel"
+      - name: 'Deploy to Vercel'
         run: |
           prodRun=""
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
