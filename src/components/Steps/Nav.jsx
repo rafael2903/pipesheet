@@ -5,7 +5,6 @@ export default function Nav({ currentStep, totalSteps, goToStep }) {
   const [steps, setSteps] = useState(Array(totalSteps).fill(false))
 
   useEffect(() => {
-    console.log(currentStep)
     setSteps((prev) => prev.map((_, idx) => idx < currentStep))
   }, [currentStep])
 
