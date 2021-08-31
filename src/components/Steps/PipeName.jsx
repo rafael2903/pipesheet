@@ -14,7 +14,7 @@ export default function PipeName({ nextStep, setData }) {
           data.pipes.map((pipe) => ({ name: pipe.name, value: pipe.id }))
         )
       } catch (error) {
-        console.log('erro:', error.message)
+        console.log(error.message)
       }
     }
     getAllPipes()

@@ -7,16 +7,13 @@ import {
   SpreadsheetId,
   Start,
   Summary,
-} from 'pages/_steps'
+} from 'components/Steps'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
 export default function Home() {
   const [data, setData] = useState({})
-
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
 
   return (
     <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden'>
