@@ -22,30 +22,28 @@ const handler = nc()
             const { title, pipeId, spreadsheetId, sheetId, webhookId } = await Integrations.find(id);
             const { pipe } = await client.request(getPhases, { pipeId });
 
-            const reducer = (accumulator, currentValue) => [...accumulator, ...currentValue];
-
             const phases = pipe.phases.map(phase => phase.name);
-            const fields = pipe.phases.map(phase => phase.fields).reduce(reducer).map(field => field.label);
+            const fields = pipe.phases.map(phase => phase.fields).reduce(( accumulator, currentItem) => [...accumulator, ...currentItem]).map(field => field.label);
 
             const { allCards } = await client.request(getAllCards, { pipeId });
-            let cards = allCards.edges.map(({ node }) => ({
+            const cards = allCards.edges.map(({ node }) => ({
                     title: node.title,
                     id: node.id,
                     done: node.done,
                     current_phase: node.current_phase.name,
-                    labels: node.labels.map(label => label.name),
+                    labels: node.labels.map(label => label.name).join(', '),
                     due_date: node.due_date,
                     createdAt: node.createdAt,
                     createdBy: node.createdBy.name,
                     updated_at: node.updated_at,
-                    assignees: node.assignees.map(assignee => assignee.name),
+                    assignees: node.assignees.map(assignee => assignee.name).join(', '),
                     phases_history: node.phases_history.map(phase => ({ 
                         name: phase.phase.name,
                         duration: phase.duration,
                         firstTimeIn: phase.firstTimeIn,
                         lastTimeOut: phase.lastTimeOut,
                     })),
-                    ...node.fields.reduce(( acc, cur) => ({ ...acc, [cur.name]: cur.value }), {})
+                    ...node.fields.reduce(( accumulator, currentItem) => ({ ...accumulator, [currentItem.name]: currentItem.value }), {})
                 }));
 
             // cards.forEach(card => card.fields.forEach(({ name }) => {
