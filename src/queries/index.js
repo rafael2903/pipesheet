@@ -22,3 +22,68 @@ export const getAllPipes = gql`
     }
   }
 `
+
+export const getAllCards = gql`
+  query ($pipeId: ID!){
+    allCards(pipeId: $pipeId) {
+      edges {
+        node {
+          
+          title
+          done
+          id
+          
+          current_phase {
+            name
+          }
+          
+          labels {
+            name
+          }
+          
+          due_date
+          
+          createdBy {
+            name
+          }
+          
+          updated_at
+          
+          assignees {
+            name
+          }
+          
+          createdAt
+          
+          fields {
+            name
+            value
+          }
+          
+          phases_history {
+            phase {
+              name
+            }
+            duration
+            firstTimeIn
+            lastTimeOut
+          }
+
+        }
+      }
+    }
+  }
+`
+export const getPhases = gql`
+  query ($pipeId: ID!){
+    pipe(id: $pipeId) {
+      phases {
+        name
+        fields {
+          label
+        }
+      }
+      
+    }
+  }
+`

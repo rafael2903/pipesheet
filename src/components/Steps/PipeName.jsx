@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Select, Button } from 'components'
+import notyf from 'config/notyf'
 import api from 'config/api'
 
 export default function PipeName({ nextStep, setData }) {
@@ -22,8 +23,11 @@ export default function PipeName({ nextStep, setData }) {
 
   function goToNextStep(e) {
     e.preventDefault()
-    setData((prev) => ({ ...prev, pipeId }))
-    nextStep()
+    if (pipeId) {
+      const pipeName = pipes.find(pipe => pipe.value === pipeId).name;
+      setData((prev) => ({ ...prev, pipeId, pipeName }))
+      nextStep()
+    } else notyf.error('Selecione um pipe')
   }
 
   return (
