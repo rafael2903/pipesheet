@@ -9,9 +9,14 @@ export default function Nav({ currentStep, totalSteps, goToStep }) {
   }, [currentStep])
 
   return (
-    <nav className='flex w-80 gap-2 justify-center'>
+    <nav className='flex w-80 gap-2 justify-center mt-5'>
       {steps.map((step, idx) => (
-        <button className=' inline' onClick={() => goToStep(idx + 1)} key={idx}>
+        <button 
+          className=' inline' 
+          onClick={() => idx < currentStep && goToStep(idx + 1)}
+          style={{ cursor: idx < currentStep ? 'pointer' : 'default' }} 
+          key={idx}
+        >
           <Circle
             className={`inline fill-current ${
               step ? 'text-blue-500' : 'text-blue-100'

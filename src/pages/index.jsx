@@ -42,8 +42,8 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='flex flex-col text-center items-center h-96 max-w-sm min-w-sm px-2 sm:px-0'>
-        <div className=''>
+      <main className='flex flex-col text-center items-center h-3/4 max-w-sm min-w-sm px-2 sm:px-0'>
+        <div  className='mb-14'>
           <Image
             src='/logo.svg'
             alt='PipeSheet Logo'

@@ -1,29 +1,20 @@
 import { useState } from 'react'
-import Lottie from 'react-lottie'
-import { TextInput, Button } from 'components'
-import loading from 'assets/lotties/loading.json'
+import { TextInput, Button, Loading } from 'components'
 import api from 'config/api'
 import notyf from 'config/notyf'
 
 export default function Summary({ data, setData, goToStep }) {
   const [integrationName, setIntegrationName] = useState('')
-  const { pipeId, sheetId, spreadsheetId } = data
+  const { pipeId, pipeName, sheetId, spreadsheetId, spreadsheetTitle } = data
   const [isLoading, setIsLoading] = useState(false)
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: loading,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  }
 
   async function createIntegration(e) {
     e.preventDefault()
-    setIsLoading(true)
-    try {
-      const data = await api.post('/integrations', {
+
+    if (integrationName) {
+      setIsLoading(true)
+      try {
+        const data = await api.post('/integrations', {
         pipeId,
         sheetId,
         spreadsheetId,
@@ -37,7 +28,8 @@ export default function Summary({ data, setData, goToStep }) {
     } finally {
       setIsLoading(false)
     }
-  }
+  } else notyf.error('Digite um nome para sua integração')
+}
 
   return (
     <form
@@ -45,7 +37,7 @@ export default function Summary({ data, setData, goToStep }) {
       className='flex w-80 flex-col justify-between items-center'
     >
       <h2 className='text-xl my-2 text-gray-700'>
-        Os dados do pipe serão sincronizados na planilha
+        Os dados do pipe <span style={{ color: '#3c85ff', fontWeight: '500' }}>{pipeName}</span> serão exportados para a planilha <span style={{ color: '#0f9d58', fontWeight: '500'}}>{spreadsheetTitle}</span> e atualizados automaticamente
       </h2>
       <TextInput
         value={integrationName}
@@ -54,7 +46,7 @@ export default function Summary({ data, setData, goToStep }) {
       />
       <Button type='submit' disabled={isLoading} onClick={createIntegration}>
         {isLoading ? (
-          <Lottie options={defaultOptions} height={44} width={44} style />
+          <Loading />
         ) : (
           'Ativar integração'
         )}

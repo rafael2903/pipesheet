@@ -3,12 +3,12 @@
 }
 
 .input {
-  @apply border border-gray-300 rounded-lg py-2 outline-none w-full px-4;
+  @apply border border-gray-300 focus:border-blue-600 rounded-lg py-2 outline-none w-full px-4 pr-9 overflow-ellipsis whitespace-nowrap overflow-hidden;
 }
 
 .options {
   @apply mt-2 border border-gray-300 rounded-lg
-  overflow-y-scroll max-h-40 absolute bg-gray-100 w-full;
+  overflow-y-scroll max-h-40 absolute bg-white w-full;
 }
 
 .options::-webkit-scrollbar {
@@ -24,7 +24,7 @@
 }
 
 .option {
-  @apply w-full hover:bg-gray-200 py-1;
+  @apply w-full hover:bg-gray-100 p-1;
 }
 
 /* .has-focus {

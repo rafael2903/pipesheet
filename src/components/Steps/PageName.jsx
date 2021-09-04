@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Select, Button } from 'components'
+import notyf from 'config/notyf'
 import api from 'config/api'
 
 export default function PageName({ nextStep, setData, data }) {
@@ -26,8 +27,10 @@ export default function PageName({ nextStep, setData, data }) {
 
   function goToNextStep(e) {
     e.preventDefault()
-    setData((prev) => ({ ...prev, sheetId }))
-    nextStep()
+    if (sheetId) {
+      setData((prev) => ({ ...prev, sheetId }))
+      nextStep()
+    } else notyf.error('Selecione uma página')
   }
 
   return (
