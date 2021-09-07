@@ -8,7 +8,7 @@
 
 .options {
   @apply mt-2 border border-gray-300 rounded-lg
-  overflow-y-scroll max-h-40 absolute bg-white w-full;
+  overflow-y-scroll max-h-36 absolute bg-white w-full;
 }
 
 .options::-webkit-scrollbar {
