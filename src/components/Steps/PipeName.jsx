@@ -45,7 +45,7 @@ export default function PipeName({ nextStep, setData }) {
           className='w-max text-right text-sm text-gray-500 cursor-default py-2' 
           data-tip="Se o seu pipe for privado,<br /> adicione o admin como administrador do pipe"
         >
-          Seu pipe não apareceu?
+          Não encontrou seu pipe?
         </p>
         <ReactTooltip effect='solid' multiline/>
       </div>
