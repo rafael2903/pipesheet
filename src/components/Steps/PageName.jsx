@@ -1,29 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Select, Button } from 'components'
 import notyf from 'config/notyf'
-import api from 'config/api'
 
 export default function PageName({ nextStep, setData, data }) {
   const [sheetId, setSheetId] = useState('')
-  const [sheets, setSheets] = useState([])
-  const { spreadsheetId } = data
-
-  useEffect(() => {
-    async function getPages() {
-      try {
-        const { data } = await api.get(`/spreadsheets/${spreadsheetId}`)
-        setSheets(
-          data.sheets.map((sheet) => ({
-            name: sheet.title,
-            value: sheet.sheetId,
-          }))
-        )
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getPages()
-  }, [spreadsheetId])
+  const { sheets } = data
 
   function goToNextStep(e) {
     e.preventDefault()
