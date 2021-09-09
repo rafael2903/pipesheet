@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 import StepWizard from 'react-step-wizard'
 import {
   Nav,
@@ -8,15 +10,12 @@ import {
   Start,
   Summary,
 } from 'components/Steps'
-import Image from 'next/image'
-import { useState, useEffect } from 'react'
 
 export default function Home() {
   const [data, setData] = useState({})
-  console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
 
   return (
-    <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden'>
+    <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden relative'>
       <Head>
         <title>PipeSheet</title>
         <meta name='title' content='PipeSheet' />
@@ -42,8 +41,8 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='flex flex-col text-center items-center h-96 max-w-sm min-w-sm px-2 sm:px-0'>
-        <div className=''>
+      <main className='flex flex-col text-center items-center h-3/4 max-w-sm min-w-sm px-2 sm:px-0'>
+        <div  className='mb-14'>
           <Image
             src='/logo.svg'
             alt='PipeSheet Logo'
@@ -55,6 +54,7 @@ export default function Home() {
         <StepWizard
           className='flex flex-col-reverse justify-between h-3/5'
           nav={<Nav />}
+          isLazyMount
         >
           <Start />
           <PipeName setData={setData} />
@@ -62,6 +62,7 @@ export default function Home() {
           <PageName data={data} setData={setData} />
           <Summary data={data} setData={setData} />
         </StepWizard>
+
       </main>
     </div>
   )
