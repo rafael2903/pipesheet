@@ -3,7 +3,7 @@ import { TextInput, Button, Loading } from 'components'
 import api from 'config/api'
 import notyf from 'config/notyf'
 
-export default function Summary({ data, setData, goToStep }) {
+export default function Summary({ data, setData, goToStep, setProgress }) {
   const [integrationName, setIntegrationName] = useState('')
   const { pipeId, pipeName, sheetId, spreadsheetId, spreadsheetTitle } = data
   const [isLoading, setIsLoading] = useState(false)
@@ -20,6 +20,7 @@ export default function Summary({ data, setData, goToStep }) {
         spreadsheetId,
         title: integrationName,
       })
+      setProgress(100)
       setData({})
       goToStep(1)
       notyf.success('Integração criada com sucesso!')

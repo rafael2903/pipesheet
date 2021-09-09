@@ -13,6 +13,7 @@ import {
 
 export default function Home() {
   const [data, setData] = useState({})
+  const [progress, setProgress] = useState(0)
 
   return (
     <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden relative'>
@@ -41,7 +42,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='flex flex-col text-center items-center h-3/4 max-w-sm min-w-sm px-2 sm:px-0'>
+      <main className='flex flex-col text-center justify-between items-center h-96 max-w-sm min-w-sm px-2 sm:px-0'>
         <div  className='mb-14'>
           <Image
             src='/logo.svg'
@@ -53,14 +54,14 @@ export default function Home() {
 
         <StepWizard
           className='flex flex-col-reverse justify-between h-3/5'
-          nav={<Nav />}
+          nav={<Nav progress={progress} setProgress={setProgress} />}
           isLazyMount
         >
           <Start />
           <PipeName setData={setData} />
           <SpreadsheetId setData={setData} />
           <PageName data={data} setData={setData} />
-          <Summary data={data} setData={setData} />
+          <Summary data={data} setData={setData} setProgress={setProgress} />
         </StepWizard>
 
       </main>
