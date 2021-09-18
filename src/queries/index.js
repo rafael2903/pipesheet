@@ -58,6 +58,7 @@ export const getAllCards = gql`
           fields {
             name
             value
+            report_value
           }
           
           phases_history {
@@ -75,15 +76,19 @@ export const getAllCards = gql`
   }
 `
 export const getPhases = gql`
-  query ($pipeId: ID!){
-    pipe(id: $pipeId) {
-      phases {
-        name
-        fields {
-          label
-        }
+query ($pipeId: ID!) {
+  pipe(id: $pipeId) {
+    start_form_fields {
+      label
+      type
+    }
+		phases {
+      name
+      fields {
+        label
+        type
       }
-      
     }
   }
+}
 `
