@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import Integrations from 'models/integrations'
 import { client } from 'config/gql'
-import { getAllCards } from 'queries'
+import { getAllCards, getPhases } from 'queries'
 import { fetchSpreadsheet } from 'config/spreadsheet'
 
 function getFormatedCards(cards) {
@@ -42,6 +42,42 @@ function getFormatedCards(cards) {
   }))
 }
 
+async function getHeadersInfo(pipeId) {
+  const { pipe } = await client.request(getPhases, { pipeId })
+
+  const phasesFields = pipe.phases
+    .map((phase) => phase.fields)
+    .reduce((accumulator, currentItem) => [...accumulator, ...currentItem])
+  const fields = [...pipe.start_form_fields, ...phasesFields]
+
+  const fieldsLabels = fields.map((field) => field.label)
+
+  const phasesHeaders = pipe.phases
+    .map((phase) => [
+      `Tempo total na fase ${phase.name} (dias)`,
+      `Primeira vez que entrou na fase ${phase.name}`,
+      `Última vez que saiu da fase ${phase.name}`,
+    ])
+    .reduce((accumulator, currentItem) => [...accumulator, ...currentItem])
+
+  const headers = [
+    'Título',
+    'id',
+    'Finalizado',
+    'Fase atual',
+    'Etiquetas',
+    'Data de vencimento do card',
+    'Criado em',
+    'Criador',
+    'Atualizado em',
+    'Responsáveis',
+    ...fieldsLabels,
+    ...phasesHeaders,
+  ]
+
+  return headers
+}
+
 const handler = nc()
   .get(async (req, res) => {
     const { id } = req.query
@@ -73,7 +109,7 @@ const handler = nc()
       const { allCards } = await client.request(getAllCards, { pipeId })
 
       const cards = getFormatedCards(allCards)
-      const headers = Object.keys(cards[0])
+      const headers = await getHeadersInfo(pipeId)
 
       const spreadsheet = await fetchSpreadsheet(spreadsheetId)
       const sheet = spreadsheet.sheetsById[sheetId]
