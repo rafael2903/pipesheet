@@ -25,6 +25,19 @@ export const getAllPipes = gql`
 
 export const getAllCards = gql`
   query ($pipeId: ID!, $after: String) {
+    pipe(id: $pipeId) {
+      start_form_fields {
+        label
+        type
+      }
+      phases {
+        name
+        fields {
+          label
+          type
+        }
+      }
+    }
     allCards(pipeId: $pipeId, after: $after) {
       pageInfo {
         hasNextPage
@@ -33,7 +46,6 @@ export const getAllCards = gql`
       edges {
         node {
           title
-          done
           id
 
           current_phase {
@@ -45,10 +57,6 @@ export const getAllCards = gql`
           }
 
           due_date
-
-          createdBy {
-            name
-          }
 
           updated_at
 

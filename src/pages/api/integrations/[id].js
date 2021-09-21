@@ -10,12 +10,10 @@ function getFormatedCards(cards) {
   return cards.map(({ node }) => ({
     ['Título']: node.title,
     ['id']: node.id,
-    ['Finalizado']: node.done,
     ['Fase atual']: node.current_phase.name,
     ['Etiquetas']: node.labels.map((label) => label.name).join(','),
     ['Data de vencimento do card']: node.due_date,
     ['Criado em']: node.createdAt,
-    ['Criador']: node.createdBy.name,
     ['Atualizado em']: node.updated_at,
     ['Responsáveis']: node.assignees.map((assignee) => assignee.name).join(','),
     ...node.fields.reduce(
@@ -42,9 +40,7 @@ function getFormatedCards(cards) {
   }))
 }
 
-async function getHeadersInfo(pipeId) {
-  const { pipe } = await client.request(getPhases, { pipeId })
-
+async function getHeadersInfo(pipe) {
   const phasesFields = pipe.phases
     .map((phase) => phase.fields)
     .reduce((accumulator, currentItem) => [...accumulator, ...currentItem])
@@ -63,12 +59,10 @@ async function getHeadersInfo(pipeId) {
   const headers = [
     'Título',
     'id',
-    'Finalizado',
     'Fase atual',
     'Etiquetas',
     'Data de vencimento do card',
     'Criado em',
-    'Criador',
     'Atualizado em',
     'Responsáveis',
     ...fieldsLabels,
@@ -82,17 +76,18 @@ async function fetchAllCards(pipeId) {
   let cards = []
   let hasNextPage = true
   let endCursor
+  let pipe
 
   while (hasNextPage) {
     const variables = endCursor ? { pipeId, after: endCursor } : { pipeId }
-    const { allCards } = await client.request(getAllCards, variables)
-    hasNextPage = allCards.pageInfo.hasNextPage
-    endCursor = allCards.pageInfo.endCursor
-    cards = [...cards, ...allCards.edges]
+    const response = await client.request(getAllCards, variables)
+    hasNextPage = response.allCards.pageInfo.hasNextPage
+    endCursor = response.allCards.pageInfo.endCursor
+    cards = [...cards, ...response.allCards.edges]
+    pipe ||= response.pipe
   }
 
-  console.log({ lenght: cards.length })
-  return cards
+  return { allCards: cards, pipe }
 }
 
 const handler = nc()
@@ -123,10 +118,10 @@ const handler = nc()
 
     try {
       const { pipeId, spreadsheetId, sheetId } = await Integrations.find(id)
-      const allCards = await fetchAllCards(pipeId)
 
+      const { allCards, pipe } = await fetchAllCards(pipeId)
       const cards = getFormatedCards(allCards)
-      const headers = await getHeadersInfo(pipeId)
+      const headers = await getHeadersInfo(pipe)
 
       const spreadsheet = await fetchSpreadsheet(spreadsheetId)
       const sheet = spreadsheet.sheetsById[sheetId]
@@ -147,7 +142,7 @@ const handler = nc()
       await sheet.setHeaderRow(headers)
       await sheet.addRows(cards)
 
-      res.status(200).json({ cards })
+      res.status(200).send()
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: error.message })
