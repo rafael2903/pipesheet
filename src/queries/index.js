@@ -24,43 +24,46 @@ export const getAllPipes = gql`
 `
 
 export const getAllCards = gql`
-  query ($pipeId: ID!){
-    allCards(pipeId: $pipeId) {
+  query ($pipeId: ID!, $after: String) {
+    allCards(pipeId: $pipeId, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       edges {
         node {
-          
           title
           done
           id
-          
+
           current_phase {
             name
           }
-          
+
           labels {
             name
           }
-          
+
           due_date
-          
+
           createdBy {
             name
           }
-          
+
           updated_at
-          
+
           assignees {
             name
           }
-          
+
           createdAt
-          
+
           fields {
             name
             value
             report_value
           }
-          
+
           phases_history {
             phase {
               name
@@ -69,26 +72,25 @@ export const getAllCards = gql`
             firstTimeIn
             lastTimeOut
           }
-
         }
       }
     }
   }
 `
 export const getPhases = gql`
-query ($pipeId: ID!) {
-  pipe(id: $pipeId) {
-    start_form_fields {
-      label
-      type
-    }
-		phases {
-      name
-      fields {
+  query ($pipeId: ID!) {
+    pipe(id: $pipeId) {
+      start_form_fields {
         label
         type
       }
+      phases {
+        name
+        fields {
+          label
+          type
+        }
+      }
     }
   }
-}
 `

@@ -7,7 +7,7 @@ import { fetchSpreadsheet } from 'config/spreadsheet'
 function getFormatedCards(cards) {
   const dateFieldsTypes = ['date', 'datetime', 'due_date']
 
-  return cards.edges.map(({ node }) => ({
+  return cards.map(({ node }) => ({
     ['Título']: node.title,
     ['id']: node.id,
     ['Finalizado']: node.done,
@@ -78,6 +78,23 @@ async function getHeadersInfo(pipeId) {
   return headers
 }
 
+async function fetchAllCards(pipeId) {
+  let cards = []
+  let hasNextPage = true
+  let endCursor
+
+  while (hasNextPage) {
+    const variables = endCursor ? { pipeId, after: endCursor } : { pipeId }
+    const { allCards } = await client.request(getAllCards, variables)
+    hasNextPage = allCards.pageInfo.hasNextPage
+    endCursor = allCards.pageInfo.endCursor
+    cards = [...cards, ...allCards.edges]
+  }
+
+  console.log({ lenght: cards.length })
+  return cards
+}
+
 const handler = nc()
   .get(async (req, res) => {
     const { id } = req.query
@@ -106,7 +123,7 @@ const handler = nc()
 
     try {
       const { pipeId, spreadsheetId, sheetId } = await Integrations.find(id)
-      const { allCards } = await client.request(getAllCards, { pipeId })
+      const allCards = await fetchAllCards(pipeId)
 
       const cards = getFormatedCards(allCards)
       const headers = await getHeadersInfo(pipeId)
@@ -130,7 +147,7 @@ const handler = nc()
       await sheet.setHeaderRow(headers)
       await sheet.addRows(cards)
 
-      res.status(200).json({ cards, headers })
+      res.status(200).json({ cards })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: error.message })
