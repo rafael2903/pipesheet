@@ -94,7 +94,7 @@ async function fetchAllCards(pipeId) {
     hasNextPage = pageInfo.hasNextPage
     endCursor = pageInfo.endCursor
     allCards = [...allCards, ...edges]
-    pipe ||= response.pipe
+    if (!pipe) pipe = response.pipe
   } while (hasNextPage)
 
   return { allCards, pipe }
