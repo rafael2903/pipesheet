@@ -14,8 +14,6 @@ import {
 export default function Home() {
   const [data, setData] = useState({})
   const [progress, setProgress] = useState(0)
-  
-  console.log(process.env.DEPLOY_URL)
 
   return (
     <div className='flex container mx-auto h-screen w-screen justify-center items-center overflow-hidden relative'>

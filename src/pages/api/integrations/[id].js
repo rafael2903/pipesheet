@@ -1,25 +1,25 @@
 import nc from 'next-connect'
 import Integrations from 'models/integrations'
-import { client } from 'config/gql'
 import { getAllCards, getPhases } from 'queries'
+import { client } from 'config/gql'
 import { fetchSpreadsheet } from 'config/spreadsheet'
 
-function getFormatedCards(cards) {
-  const dateFieldsTypes = ['date', 'datetime', 'due_date']
+function getFormattedCards(cards, dateFieldsLabels) {
+  const SECONDS_IN_A_DAY = 86400
 
   return cards.map(({ node }) => ({
-    ['Título']: node.title,
     ['id']: node.id,
+    ['Título']: node.title,
     ['Fase atual']: node.current_phase.name,
     ['Etiquetas']: node.labels.map((label) => label.name).join(','),
-    ['Data de vencimento do card']: node.due_date,
-    ['Criado em']: node.createdAt,
-    ['Atualizado em']: node.updated_at,
     ['Responsáveis']: node.assignees.map((assignee) => assignee.name).join(','),
+    ['Criado em']: new Date(node.createdAt).toLocaleString('pt-BR'),
+    ['Atualizado em']: new Date(node.updated_at).toLocaleString('pt-BR'),
+    ['Data de vencimento do card']: new Date(node.due_date).toLocaleString('pt-BR'),
     ...node.fields.reduce(
       (accumulator, currentItem) => ({
         ...accumulator,
-        [currentItem.name]: dateFieldsTypes.includes(currentItem.type)
+        [currentItem.name]: dateFieldsLabels.includes(currentItem.name)
           ? currentItem.value
           : currentItem.report_value,
       }),
@@ -29,26 +29,37 @@ function getFormatedCards(cards) {
       (accumulator, currentItem) => ({
         ...accumulator,
         [`Tempo total na fase ${currentItem.phase.name} (dias)`]:
-          currentItem.duration,
+          (currentItem.duration/(SECONDS_IN_A_DAY)).toFixed(6).replace('.',','),
         [`Primeira vez que entrou na fase ${currentItem.phase.name}`]:
-          currentItem.firstTimeIn,
-        [`Última vez que saiu da fase ${currentItem.phase.name}`]:
-          currentItem.lastTimeOut,
+          new Date(currentItem.firstTimeIn).toLocaleString('pt-BR'),
+          [`Última vez que saiu da fase ${currentItem.phase.name}`]:
+          new Date(currentItem.lastTimeOut).toLocaleString('pt-BR'),
       }),
       {}
     ),
   }))
 }
 
-async function getHeadersInfo(pipe) {
-  const phasesFields = pipe.phases
+function getPipePhasesAndFields(pipe) {
+  const phases = pipe.phases
+  const phasesFields = phases
     .map((phase) => phase.fields)
     .reduce((accumulator, currentItem) => [...accumulator, ...currentItem])
-  const fields = [...pipe.start_form_fields, ...phasesFields]
+    const fields = [...pipe.start_form_fields, ...phasesFields]
+    return { phases, fields }
+}
+
+function getDateFieldsLabels(fields) {
+  return fields
+  .filter((field) => field.type === 'date' || field.type === 'datetime' || field.type === 'due_date')
+  .map((field) => field.label)
+}
+
+function getHeaders(phases, fields) {
 
   const fieldsLabels = fields.map((field) => field.label)
 
-  const phasesHeaders = pipe.phases
+  const phasesHeaders = phases
     .map((phase) => [
       `Tempo total na fase ${phase.name} (dias)`,
       `Primeira vez que entrou na fase ${phase.name}`,
@@ -57,14 +68,14 @@ async function getHeadersInfo(pipe) {
     .reduce((accumulator, currentItem) => [...accumulator, ...currentItem])
 
   const headers = [
-    'Título',
     'id',
+    'Título',
     'Fase atual',
     'Etiquetas',
-    'Data de vencimento do card',
+    'Responsáveis',
     'Criado em',
     'Atualizado em',
-    'Responsáveis',
+    'Data de vencimento do card',
     ...fieldsLabels,
     ...phasesHeaders,
   ]
@@ -73,21 +84,20 @@ async function getHeadersInfo(pipe) {
 }
 
 async function fetchAllCards(pipeId) {
-  let cards = []
-  let hasNextPage = true
-  let endCursor
-  let pipe
+  let allCards = []
+  let hasNextPage, endCursor, pipe
 
-  while (hasNextPage) {
+  do {
     const variables = endCursor ? { pipeId, after: endCursor } : { pipeId }
     const response = await client.request(getAllCards, variables)
-    hasNextPage = response.allCards.pageInfo.hasNextPage
-    endCursor = response.allCards.pageInfo.endCursor
-    cards = [...cards, ...response.allCards.edges]
+    const { pageInfo, edges } = response.allCards
+    hasNextPage = pageInfo.hasNextPage
+    endCursor = pageInfo.endCursor
+    allCards = [...allCards, ...edges]
     pipe ||= response.pipe
-  }
+  } while (hasNextPage)
 
-  return { allCards: cards, pipe }
+  return { allCards, pipe }
 }
 
 const handler = nc()
@@ -119,9 +129,14 @@ const handler = nc()
     try {
       const { pipeId, spreadsheetId, sheetId } = await Integrations.find(id)
 
-      const { allCards, pipe } = await fetchAllCards(pipeId)
-      const cards = getFormatedCards(allCards)
-      const headers = await getHeadersInfo(pipe)
+      const { allCards } = await fetchAllCards(pipeId)
+      const { pipe } = await client.request(getPhases, { pipeId })
+      
+      const { phases, fields } = getPipePhasesAndFields(pipe)
+      const dateFieldsLabels = getDateFieldsLabels(fields)
+      const headers = getHeaders(phases, fields)
+
+      const cards = getFormattedCards(allCards, dateFieldsLabels)
 
       const spreadsheet = await fetchSpreadsheet(spreadsheetId)
       const sheet = spreadsheet.sheetsById[sheetId]
@@ -142,7 +157,7 @@ const handler = nc()
       await sheet.setHeaderRow(headers)
       await sheet.addRows(cards)
 
-      res.status(200).send()
+      res.status(200).json({ cards })
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: error.message })
