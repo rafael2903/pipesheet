@@ -1,11 +1,14 @@
-name: 'Deploy'
+name: 'Deploy de Produção'
 
 on:
+  push:
+    branches:
+      - main
+      - develop
   pull_request:
     branches:
       - main
       - develop
-
 jobs:
   vercel:
     runs-on: ubuntu-latest
