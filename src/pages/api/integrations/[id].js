@@ -128,8 +128,6 @@ const handler = nc()
 
     try {
       const { pipeId, spreadsheetId, sheetId } = await Integrations.find(id)
-      
-      res.status(200).send()
 
       const { allCards } = await fetchAllCards(pipeId)
       const { pipe } = await client.request(getPhases, { pipeId })
@@ -159,6 +157,7 @@ const handler = nc()
       await sheet.setHeaderRow(headers)
       await sheet.addRows(cards)
 
+      res.status(200).json({message: "Integração criada com sucesso"})
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: error.message })
