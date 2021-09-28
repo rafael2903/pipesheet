@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from 'react-tooltip'
 import { Select, Button } from 'components'
 import notyf from 'config/notyf'
 import api from 'config/api'
 
-export default function PipeName({ nextStep, setData }) {
-  const [pipeId, setPipeId] = useState('')
+export default function PipeName({ nextStep, previousStep, data, setData }) {
+  const [pipeId, setPipeId] = useState(data.pipeId)
   const [pipes, setPipes] = useState([])
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function PipeName({ nextStep, setData }) {
   function goToNextStep(e) {
     e.preventDefault()
     if (pipeId) {
-      const pipeName = pipes.find(pipe => pipe.value === pipeId).name;
+      const pipeName = pipes.find((pipe) => pipe.value === pipeId).name
       setData((prev) => ({ ...prev, pipeId, pipeName }))
       nextStep()
     } else notyf.error('Selecione um pipe')
@@ -40,14 +40,14 @@ export default function PipeName({ nextStep, setData }) {
         Escolha de qual pipe você deseja obter os dados
       </h2>
 
-      <div className='-mb-4 mt-3 w-full flex justify-end' >
-        <p 
-          className='w-max text-right text-sm text-gray-500 cursor-default py-2' 
-          data-tip="Se o seu pipe for privado,<br /> adicione o admin como administrador do pipe"
+      <div className='-mb-4 mt-3 w-full flex justify-end'>
+        <p
+          className='w-max text-right text-sm text-gray-500 cursor-default py-2'
+          data-tip='Se o seu pipe for privado,<br /> adicione o admin como administrador do pipe'
         >
           Não encontrou seu pipe?
         </p>
-        <ReactTooltip effect='solid' multiline/>
+        <ReactTooltip effect='solid' multiline />
       </div>
 
       <Select
@@ -57,6 +57,14 @@ export default function PipeName({ nextStep, setData }) {
         placeholder='Selecione seu pipe'
       />
       <Button type='submit'>Continuar</Button>
+      <Button
+        type='button'
+        className='mt-2'
+        variation={'secondary'}
+        onClick={previousStep}
+      >
+        Voltar
+      </Button>
     </form>
   )
 }

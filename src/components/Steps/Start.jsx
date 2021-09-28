@@ -9,6 +9,7 @@ export default function Start({ nextStep }) {
       </h2>
 
       <Button onClick={nextStep}>Criar integração</Button>
+
       <p className='text-xs mt-3 text-gray-700'>
         Deseja deletar uma integração já criada?{' '}
         <Link href='/integrations'>
