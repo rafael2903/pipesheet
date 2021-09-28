@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Select, Button } from 'components'
 import notyf from 'config/notyf'
 
-export default function PageName({ nextStep, setData, data }) {
-  const [sheetId, setSheetId] = useState('')
+export default function PageName({ nextStep, previousStep, data, setData }) {
+  const [sheetId, setSheetId] = useState(data.sheetId)
   const { sheets } = data
 
   function goToNextStep(e) {
@@ -29,6 +29,14 @@ export default function PageName({ nextStep, setData, data }) {
         placeholder='Selecione sua página'
       />
       <Button type='submit'>Continuar</Button>
+      <Button
+        type='button'
+        className='mt-2'
+        variation={'secondary'}
+        onClick={previousStep}
+      >
+        Voltar
+      </Button>
     </form>
   )
 }
