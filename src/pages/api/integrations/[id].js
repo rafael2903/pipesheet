@@ -96,7 +96,7 @@ function getHeaders(phases, fields) {
 
 async function fetchAllCards(pipeId) {
   let allCards = []
-  let hasNextPage, endCursor, pipe
+  let hasNextPage, endCursor
 
   do {
     const variables = endCursor ? { pipeId, after: endCursor } : { pipeId }
@@ -105,10 +105,9 @@ async function fetchAllCards(pipeId) {
     hasNextPage = pageInfo.hasNextPage
     endCursor = pageInfo.endCursor
     allCards.push(...edges)
-    if (!pipe) pipe = response.pipe
   } while (hasNextPage)
 
-  return { allCards, pipe }
+  return allCards
 }
 
 const handler = nc()
@@ -140,7 +139,7 @@ const handler = nc()
     try {
       const { pipeId, spreadsheetId, sheetId } = await Integrations.find(id)
 
-      const { allCards } = await fetchAllCards(pipeId)
+      const allCards = await fetchAllCards(pipeId)
       const { pipe } = await client.request(getPhases, { pipeId })
 
       const { phases, fields } = getPipePhasesAndFields(pipe)
