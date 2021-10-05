@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-lambda": "^3.34.0",
     "@headlessui/react": "^1.4.0",
     "@svgr/webpack": "^5.5.0",
     "axios": "^0.21.1",
