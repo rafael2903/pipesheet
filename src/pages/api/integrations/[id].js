@@ -25,6 +25,7 @@ const handler = nc()
   })
   .delete(async (req, res) => {
     const { id } = req.query
+
     try {
       await Integrations.destroy(id)
       res.status(200).json({ message: 'Delete complete' })
