@@ -5,6 +5,10 @@ const handler = nc().post(async (req, res) => {
   try {
     const client = new LambdaClient({
       region: 'us-west-1',
+      credentials: {
+        accessKeyId: process.env.PIPESHEET_AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.PIPESHEET_AWS_SECRET_ACCESS_KEY,
+      },
     })
     const command = new InvokeCommand({
       FunctionName: 'pipesheet-dev-synchronize',
