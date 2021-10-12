@@ -1,21 +1,18 @@
 import nc from 'next-connect'
-import Integrations from 'models/integrations'
-import api from 'config/api'
+import Integrations from 'controllers/integrations'
 
 const handler = nc()
   .post(async (req, res) => {
     const { pipeId, spreadsheetId, sheetId, title } = req.body
+
     try {
-      const integration = await Integrations.create({
+      const response = Integrations.create({
         pipeId,
         spreadsheetId,
         sheetId,
         title,
       })
-
-      await api.post(`/integrations/${integration.id}`);
-
-      res.status(200).json({ integration })
+      res.status(200).json({ response })
     } catch (error) {
       res.status(500).json({ error: error.message })
     }

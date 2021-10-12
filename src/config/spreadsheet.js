@@ -10,9 +10,4 @@ async function fetchSpreadsheet(id) {
   return spreadsheet
 }
 
-async function fetchDatabase() {
-  const databaseSpreadsheetId = '1BradceGk7g9PDAUFlX_9tUyiZm4AYLz0LWx35DWNokg'
-  return await fetchSpreadsheet(databaseSpreadsheetId)
-}
-
-export { fetchSpreadsheet, fetchDatabase }
+export default fetchSpreadsheet
