@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import ReactTooltip from 'react-tooltip'
-import { Button, TextInput, Loading } from 'components'
+import { Button, TextInput } from 'components'
 import notyf from 'config/notyf'
 import api from 'config/api'
 import Help from 'assets/help.svg'
+import Spinner from 'react-spinner-material'
 
 export default function SpreadsheetId({
   nextStep,
@@ -70,7 +71,11 @@ export default function SpreadsheetId({
       </div>
 
       <Button type='submit' disabled={isLoading}>
-        {isLoading ? <Loading /> : 'Continuar'}
+        {isLoading ? (
+          <Spinner radius={20} color='white' stroke={2} visible={true} />
+        ) : (
+          'Continuar'
+        )}
       </Button>
 
       <Button

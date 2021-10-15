@@ -3,13 +3,16 @@ import ReactTooltip from 'react-tooltip'
 import { Select, Button } from 'components'
 import notyf from 'config/notyf'
 import api from 'config/api'
+import Spinner from 'react-spinner-material'
 
 export default function PipeName({ nextStep, previousStep, data, setData }) {
   const [pipeId, setPipeId] = useState(data.pipeId)
   const [pipes, setPipes] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     async function getAllPipes() {
+      setIsLoading(true)
       try {
         const { data } = await api.get('/pipes')
         setPipes(
@@ -17,6 +20,8 @@ export default function PipeName({ nextStep, previousStep, data, setData }) {
         )
       } catch (error) {
         console.log(error.message)
+      } finally {
+        setIsLoading(false)
       }
     }
     getAllPipes()
@@ -40,22 +45,31 @@ export default function PipeName({ nextStep, previousStep, data, setData }) {
         Escolha de qual pipe você deseja obter os dados
       </h2>
 
-      <div className='-mb-4 mt-3 w-full flex justify-end'>
-        <p
-          className='w-max text-right text-sm text-gray-500 cursor-default py-2'
-          data-tip='Se o seu pipe for privado,<br /> adicione o admin como administrador do pipe'
-        >
-          Não encontrou seu pipe?
-        </p>
-        <ReactTooltip effect='solid' multiline />
-      </div>
+      {isLoading ? (
+        <div className='w-full my-7 flex justify-center items-center flex-col'>
+          <Spinner radius={18} color={'gray'} stroke={1} visible={true} />
+          <p className='mt-2 text-gray-500  '>Carregando pipes</p>
+        </div>
+      ) : (
+        <>
+          <div className='-mb-4 mt-3 w-full flex justify-end'>
+            <p
+              className='w-max text-right text-sm text-gray-500 cursor-default py-2'
+              data-tip='Se o seu pipe for privado,<br /> adicione o admin como administrador do pipe'
+            >
+              Não encontrou seu pipe?
+            </p>
+            <ReactTooltip effect='solid' multiline />
+          </div>
+          <Select
+            options={pipes}
+            value={pipeId}
+            onChange={setPipeId}
+            placeholder='Selecione seu pipe'
+          />
+        </>
+      )}
 
-      <Select
-        options={pipes}
-        value={pipeId}
-        onChange={setPipeId}
-        placeholder='Selecione seu pipe'
-      />
       <Button type='submit'>Continuar</Button>
       <Button
         type='button'

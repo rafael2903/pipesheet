@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { TextInput, Button, Loading } from 'components'
+import { TextInput, Button } from 'components'
 import api from 'config/api'
 import notyf from 'config/notyf'
+import Spinner from 'react-spinner-material'
 
 export default function Summary({
   data,
@@ -61,7 +62,11 @@ export default function Summary({
         placeholder='Dê um nome a sua integração'
       />
       <Button type='submit' disabled={isLoading} onClick={createIntegration}>
-        {isLoading ? <Loading /> : 'Ativar integração'}
+        {isLoading ? (
+          <Spinner radius={19} color='white' stroke={2} visible={true} />
+        ) : (
+          'Ativar integração'
+        )}
       </Button>
 
       <Button

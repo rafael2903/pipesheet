@@ -3,12 +3,12 @@ import { Select, Button } from 'components'
 import notyf from 'config/notyf'
 
 export default function PageName({ nextStep, previousStep, data, setData }) {
-  const [sheetId, setSheetId] = useState(data.sheetId)
   const { sheets } = data
+  const [sheetId, setSheetId] = useState(data.sheetId || sheets[0]?.value)
 
   function goToNextStep(e) {
     e.preventDefault()
-    if (sheetId) {
+    if (sheetId !== undefined) {
       setData((prev) => ({ ...prev, sheetId }))
       nextStep()
     } else notyf.error('Selecione uma página')

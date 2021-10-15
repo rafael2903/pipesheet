@@ -13,7 +13,7 @@ export default function Button({
   return (
     <button
       disabled={disabled}
-      className={`${variations[variation]} ${className} text-lg w-full h-11 rounded-lg px-4`}
+      className={`${variations[variation]} ${className} text-lg w-full flex justify-center items-center h-11 rounded-lg px-4`}
       {...rest}
     />
   )
