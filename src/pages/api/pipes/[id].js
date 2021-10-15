@@ -1,8 +1,8 @@
-import nc from 'next-connect'
+import base from '../middleware/cors'
 import { client } from 'config/gql'
 import { getPipe } from 'queries'
 
-const handler = nc().get(async (req, res) => {
+const handler = base().get(async (req, res) => {
   const { id } = req.query
 
   try {
