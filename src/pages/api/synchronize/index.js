@@ -4,7 +4,7 @@ import Integrations from 'controllers/integrations'
 
 const handler = nc().post(async (req, res) => {
   try {
-    const integrations = Integrations.all()
+    const integrations = await Integrations.all()
 
     const client = new LambdaClient({
       region: 'us-west-1',
@@ -16,7 +16,7 @@ const handler = nc().post(async (req, res) => {
     const command = new InvokeCommand({
       FunctionName: 'pipesheet-dev-synchronize',
       InvocationType: 'Event ',
-      Payload: JSON.stringify(integrations),
+      Payload: JSON.stringify({ integrations }),
     })
     const response = await client.send(command)
 
