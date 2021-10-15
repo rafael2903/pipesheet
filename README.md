@@ -7,7 +7,7 @@
 
 [Pipesheet](https://pipesheet.vercel.app) é um app construído com [Next.js](https://nextjs.org/) para criar integrações entre pipes e planilhas do Google.
 
-Com ele é possível ter os dados dos seus pipes em planilhas, que são atualizadas automaticamente quando há alguma mudança nos pipes.
+Com ele é possível ter os dados dos seus pipes em planilhas, que são atualizadas automaticamente a cada 10 minutos.
 
 [API Reference]() - Ainda em construção
 

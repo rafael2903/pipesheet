@@ -3,11 +3,11 @@ name: 'Synchronize'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   Synchronize_integrations:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl -X POST 'https://pipesheet-akpigzx8t-admincjr.vercel.app/api/synchronize' -H "Accept: */*"
+          curl -X POST 'https://pipesheet.vercel.app/api/synchronize' -H "Accept: */*"
