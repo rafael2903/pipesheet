@@ -1,7 +1,7 @@
-import nc from 'next-connect'
 import Integrations from 'controllers/integrations'
+import base from '../middleware/cors'
 
-const handler = nc()
+const handler = base()
   .get(async (req, res) => {
     const { id } = req.query
 

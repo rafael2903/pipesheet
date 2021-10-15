@@ -1,7 +1,7 @@
-import nc from 'next-connect'
+import base from '../middleware/cors'
 import Integrations from 'controllers/integrations'
 
-const handler = nc()
+const handler = base()
   .post(async (req, res) => {
     const { pipeId, spreadsheetId, sheetId, title } = req.body
 
