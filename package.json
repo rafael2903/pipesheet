@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.36.0",
+    "@aws-sdk/client-lambda": "^3.34.0",
     "@headlessui/react": "^1.4.0",
     "@svgr/webpack": "^5.5.0",
     "axios": "^0.21.2",
@@ -36,7 +38,6 @@
     "autoprefixer": "^10.3.1",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
-    "netlify-plugin-inline-functions-env": "^1.0.9",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.7"
   }

@@ -72,6 +72,7 @@ export const getAllCards = gql`
     }
   }
 `
+
 export const getPhases = gql`
   query ($pipeId: ID!) {
     pipe(id: $pipeId) {

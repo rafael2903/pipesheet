@@ -55,9 +55,9 @@ export default function IntegrationsPage() {
   ]
 
   return (
-    <div className='container mx-auto mt-14 justify-center flex flex-col'>
+    <div className='container mx-auto mt-14 justify-center flex flex-col mb-12'>
       <Link href='/'>
-        <a style={{ width: 'fit-content', margin: '0 auto'}}>
+        <a style={{ width: 'fit-content', margin: '0 auto' }}>
           <Image src='/logo.svg' alt='PipeSheet Logo' width={200} height={70} />
         </a>
       </Link>

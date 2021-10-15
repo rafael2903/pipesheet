@@ -11,10 +11,7 @@ export default function Select({ ...rest }) {
     })
 
     return (value) => {
-      if (!value.length) {
-        return options
-      }
-
+      if (!value.length) return options
       return fuse.search(value)
     }
   }
@@ -22,20 +19,10 @@ export default function Select({ ...rest }) {
   return (
     <div className='w-full relative'>
       <div className='absolute right-4 z-50 transform -translate-y-2/4  top-1/2 h-5'>
-        <Image 
-          src='/expand.svg'
-          alt='expandir lista'
-          width={20}
-          height={20}
-        />
+        <Image src='/expand.svg' alt='expandir lista' width={20} height={20} />
       </div>
       <SelectSearch
         search
-        options={[
-          { value: 'hamburger', name: 'Hamburger' },
-          { value: 'fries', name: 'Fries' },
-          { value: 'milkshake', name: 'Milkshake' },
-        ]}
         filterOptions={fuzzySearch}
         emptyMessage='Não encontrado'
         className={(key) => styles[key]}
