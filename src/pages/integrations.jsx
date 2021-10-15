@@ -81,7 +81,7 @@ export default function IntegrationsPage() {
 
         {loading ? (
           <div className='mt-20'>
-            <Spinner radius={40} color={'#3c85ff'} stroke={3} visible={true} />
+            <Spinner radius={30} color={'#3c85ff'} stroke={3} visible={true} />
           </div>
         ) : error ? (
           <h2>Erro: {error}</h2>
