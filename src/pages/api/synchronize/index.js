@@ -1,8 +1,8 @@
-import nc from 'next-connect'
+import base from '../middleware/cors'
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda'
 import Integrations from 'controllers/integrations'
 
-const handler = nc().post(async (req, res) => {
+const handler = base().post(async (req, res) => {
   try {
     const integrations = await Integrations.all()
 

@@ -1,7 +1,7 @@
-import nc from 'next-connect'
+import base from '../middleware/cors'
 import fetchSpreadsheet from 'config/spreadsheet'
 
-const handler = nc().get(async (req, res) => {
+const handler = base().get(async (req, res) => {
   const { id } = req.query
 
   try {
