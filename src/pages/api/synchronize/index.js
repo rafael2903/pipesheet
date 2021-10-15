@@ -1,8 +1,11 @@
 import nc from 'next-connect'
 import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda'
+import Integrations from 'controllers/integrations'
 
 const handler = nc().post(async (req, res) => {
   try {
+    const integrations = Integrations.all()
+
     const client = new LambdaClient({
       region: 'us-west-1',
       credentials: {
@@ -13,6 +16,7 @@ const handler = nc().post(async (req, res) => {
     const command = new InvokeCommand({
       FunctionName: 'pipesheet-dev-synchronize',
       InvocationType: 'Event ',
+      Payload: JSON.stringify(integrations),
     })
     const response = await client.send(command)
 
