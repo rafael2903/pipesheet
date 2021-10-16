@@ -44,14 +44,14 @@ export default function Summary({
       onSubmit={createIntegration}
       className='flex w-80 flex-col justify-between items-center'
     >
-      <h2 className='text-xl my-2 text-gray-700'>
+      <h2 className='text-lg my-2 text-gray-700'>
         Os dados do pipe{' '}
         <span style={{ color: '#3c85ff', fontWeight: '500' }}>{pipeName}</span>{' '}
         serão exportados para a planilha{' '}
         <span style={{ color: '#0f9d58', fontWeight: '500' }}>
           {spreadsheetTitle}
         </span>{' '}
-        e atualizados automaticamente
+        e atualizados a cada 10 minutos
       </h2>
       <TextInput
         value={integrationName}

@@ -43,7 +43,7 @@ export default function Home() {
       </Head>
 
       <main className='flex flex-col text-center justify-between items-center h-96 max-w-sm min-w-sm px-2 sm:px-0'>
-        <div className='mb-14'>
+        <div className='mb-20'>
           <Image
             src='/logo.svg'
             alt='PipeSheet Logo'
