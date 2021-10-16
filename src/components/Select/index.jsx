@@ -1,7 +1,7 @@
 import SelectSearch from 'react-select-search/dist/cjs/SelectSearch'
 import Fuse from 'fuse.js'
 import styles from './styles.module.css'
-import Image from 'next/image'
+import { IoMdArrowDropdown } from 'react-icons/io'
 
 export default function Select({ ...rest }) {
   function fuzzySearch(options) {
@@ -19,7 +19,7 @@ export default function Select({ ...rest }) {
   return (
     <div className='w-full relative'>
       <div className='absolute right-4 z-50 transform -translate-y-2/4  top-1/2 h-5'>
-        <Image src='/expand.svg' alt='expandir lista' width={20} height={20} />
+        <IoMdArrowDropdown size='20px' color='#bbb' />
       </div>
       <SelectSearch
         search

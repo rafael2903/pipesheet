@@ -3,7 +3,7 @@ import DataTable from 'react-data-table-component'
 import Spinner from 'react-spinner-material'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { BsArrowLeft } from 'react-icons/bs'
 import { DeleteButton } from 'components'
 import api from 'config/api'
 
@@ -66,13 +66,7 @@ export default function IntegrationsPage() {
           <div className='flex items-center'>
             <Link href='/'>
               <a style={{ height: 26 }}>
-                <Image
-                  src='/arrow_left.svg'
-                  alt='Voltar'
-                  title='Voltar'
-                  width={26}
-                  height={26}
-                />
+                <BsArrowLeft title='Voltar' size='26px' />
               </a>
             </Link>
           </div>
