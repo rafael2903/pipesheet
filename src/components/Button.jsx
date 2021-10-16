@@ -7,7 +7,8 @@ export default function Button({
   const variations = {
     primary:
       'bg-blue-600 hover:bg-blue-700 text-white disabled:cursor-not-allowed disabled:bg-blue-600',
-    secondary: 'text-gray-600',
+    secondary:
+      'text-blue-600 bg-white border border-gray-300 hover:bg-gray-100',
   }
 
   return (

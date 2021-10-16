@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import ReactTooltip from 'react-tooltip'
-import { Button, TextInput } from 'components'
-import notyf from 'config/notyf'
-import api from 'config/api'
-import Help from 'assets/help.svg'
 import Spinner from 'react-spinner-material'
+import { IoMdHelpCircle } from 'react-icons/io'
+import api from 'config/api'
+import notyf from 'config/notyf'
+import { Button, TextInput } from 'components'
 
 export default function SpreadsheetId({
   nextStep,
@@ -65,7 +65,7 @@ export default function SpreadsheetId({
           data-html
           className='absolute right-2 top-2/4 transform -translate-y-2/4 p-1'
         >
-          <Help />
+          <IoMdHelpCircle color='#bbb' size='24px' />
           <ReactTooltip effect='solid' multiline />
         </span>
       </div>

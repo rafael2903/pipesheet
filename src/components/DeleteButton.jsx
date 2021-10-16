@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Image from 'next/image'
 import Spinner from 'react-spinner-material'
+import { MdOutlineClose } from 'react-icons/md'
 import api from 'config/api'
 
 export default function DeleteButton(id, setData) {
@@ -34,12 +34,10 @@ export default function DeleteButton(id, setData) {
       {loading ? (
         <Spinner radius={15} color={'#FF1E1E'} stroke={2} visible={true} />
       ) : (
-        <Image
-          src='/delete.svg'
-          alt='Excluir integração'
+        <MdOutlineClose
           title='Excluir integração'
-          width={25}
-          height={25}
+          color='#FF1E1E'
+          size='24px'
         />
       )}
     </button>

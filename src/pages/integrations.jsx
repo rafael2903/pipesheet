@@ -3,13 +3,16 @@ import DataTable from 'react-data-table-component'
 import Spinner from 'react-spinner-material'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { BsArrowLeft } from 'react-icons/bs'
+import { AiOutlineSync } from 'react-icons/ai'
 import { DeleteButton } from 'components'
 import api from 'config/api'
+import notyf from 'config/notyf'
 
 export default function IntegrationsPage() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [synchronizing, setSynchronizing] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -21,6 +24,17 @@ export default function IntegrationsPage() {
       .catch((error) => setError(error.message))
       .finally(() => setLoading(false))
   }, [])
+
+  const synchronize = async () => {
+    setSynchronizing(true)
+    api
+      .post('/synchronize')
+      .then(() => notyf.success('Integrações sincronizadas'))
+      .catch((error) =>
+        notyf.error(`Erro ao sincronizar integrações: ${error.message}`)
+      )
+      .finally(() => setSynchronizing(false))
+  }
 
   const columns = [
     {
@@ -66,17 +80,19 @@ export default function IntegrationsPage() {
           <div className='flex items-center'>
             <Link href='/'>
               <a style={{ height: 26 }}>
-                <Image
-                  src='/arrow_left.svg'
-                  alt='Voltar'
-                  title='Voltar'
-                  width={26}
-                  height={26}
-                />
+                <BsArrowLeft title='Voltar' size='26px' />
               </a>
             </Link>
           </div>
           <h1 className='ml-10 text-3xl p-2'>Integrações</h1>
+          <button onClick={synchronize}>
+            <AiOutlineSync
+              size='20px'
+              color='#0F9D58'
+              className={synchronizing ? 'mt-2 animate-spin' : 'mt-2'}
+              title='Sincronizar agora'
+            />
+          </button>
         </div>
 
         {loading ? (

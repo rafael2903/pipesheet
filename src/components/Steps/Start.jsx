@@ -10,12 +10,13 @@ export default function Start({ nextStep }) {
 
       <Button onClick={nextStep}>Criar integração</Button>
 
-      <p className='text-xs mt-3 text-gray-700'>
-        Deseja deletar uma integração já criada?{' '}
-        <Link href='/integrations'>
-          <a className='text-blue-600 hover:underline'>Clique aqui.</a>
+      <span className='mt-2 w-full'>
+        <Link href='/integrations' passHref>
+          <Button onClick={() => {}} variation='secondary'>
+            Ver integrações
+          </Button>
         </Link>
-      </p>
+      </span>
     </div>
   )
 }
