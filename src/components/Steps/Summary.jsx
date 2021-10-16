@@ -32,10 +32,7 @@ export default function Summary({
         goToStep(1)
         notyf.success('Integração criada com sucesso!')
       } catch (error) {
-        notyf.error('Houve um erro ao criar a integração.')
-        notyf.error(
-          'Verifique se o pipe não tem nenhum campo com o mesmo nome.'
-        )
+        notyf.error('Houve um erro ao tentar criar a integração.')
       } finally {
         setIsLoading(false)
       }
