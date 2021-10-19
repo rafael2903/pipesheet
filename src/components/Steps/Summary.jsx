@@ -11,20 +11,27 @@ export default function Summary({
   goToStep,
   setProgress,
 }) {
-  const { pipeId, pipeName, sheetId, spreadsheetId, spreadsheetTitle } = data
+  const {
+    pipeId,
+    pipeName,
+    sheetId,
+    spreadsheetId,
+    spreadsheetTitle,
+    columns,
+  } = data
   const [integrationName, setIntegrationName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   async function createIntegration(e) {
     e.preventDefault()
-
     if (integrationName) {
       setIsLoading(true)
       try {
-        const data = await api.post('/integrations', {
+        await api.post('/integrations', {
           pipeId,
           sheetId,
           spreadsheetId,
+          columns,
           title: integrationName,
         })
         setProgress(100)
