@@ -16,8 +16,8 @@ Com ele é possível ter os dados dos seus pipes em planilhas, que são atualiza
 Basta executar os seguintes comandos:
 
 ```bash
-yarn install # ou npm install
-yarn dev # ou npm run dev
+yarn install
+yarn dev
 ```
 
 Com isso o projeto deve estar rodando em https://localhost:3000.
