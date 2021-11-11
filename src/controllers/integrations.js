@@ -9,7 +9,12 @@ import ddbClient from 'config/ddbClient'
 
 class Integrations {
   static formatItem(item) {
-    Object.keys(item).forEach((key) => (item[key] = item[key].S || item[key].N))
+    Object.keys(item).forEach((key) => {
+      if (item[key].M) {
+        item[key] = item[key].M
+        this.formatItem(item[key])
+      } else item[key] = item[key].S || item[key].N || item[key].BOOL
+    })
   }
 
   static formatItems(items) {
