@@ -1,0 +1,11 @@
+.container::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.container::-webkit-scrollbar-track {
+  @apply bg-gray-200  rounded-lg;
+}
+
+.container::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 hover:bg-gray-400 rounded-md;
+}

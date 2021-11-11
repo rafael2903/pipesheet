@@ -4,7 +4,7 @@ import api from 'config/api'
 
 const handler = base()
   .post(async (req, res) => {
-    const { pipeId, spreadsheetId, sheetId, title } = req.body
+    const { pipeId, spreadsheetId, sheetId, title, columns } = req.body
 
     try {
       const response = await Integrations.create({
@@ -12,11 +12,12 @@ const handler = base()
         spreadsheetId,
         sheetId,
         title,
+        columns
       })
 
       await api.post('/synchronize')
 
-      res.status(200).json({ response })
+      res.status(201).json({ response })
     } catch (error) {
       res.status(500).json({ error: error.message })
     }
