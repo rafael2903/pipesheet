@@ -16,7 +16,7 @@ class Integrations {
     items.forEach((item) => this.formatItem(item))
   }
 
-  static async create({ pipeId, spreadsheetId, sheetId, title }) {
+  static async create({ pipeId, spreadsheetId, sheetId, title, columns }) {
     const integrationId = nanoid()
 
     const input = {
@@ -25,6 +25,21 @@ class Integrations {
       pipeId: { N: pipeId },
       spreadsheetId: { S: spreadsheetId },
       sheetId: { N: sheetId.toString() },
+      columns: {
+        M: {
+          id: { BOOL: columns.id },
+          title: { BOOL: columns.title },
+          currentPhase: { BOOL: columns.currentPhase },
+          labels: { BOOL: columns.labels },
+          assignees: { BOOL: columns.assignees },
+          createdAt: { BOOL: columns.createdAt },
+          updatedAt: { BOOL: columns.updatedAt },
+          dueDate: { BOOL: columns.dueDate },
+          startFormFields: { BOOL: columns.startFormFields },
+          phasesFormsFields: { BOOL: columns.phasesFormsFields },
+          phasesHistory: { BOOL: columns.phasesHistory },
+        },
+      },
     }
 
     const params = {
