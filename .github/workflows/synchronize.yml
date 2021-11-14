@@ -8,6 +8,7 @@ on:
 jobs:
   Synchronize_integrations:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
       - run: |
           curl -X POST 'https://pipesheet.vercel.app/api/synchronize' -H "Accept: */*"
