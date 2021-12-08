@@ -1,0 +1,40 @@
+{
+    "pipes": [
+        {
+            "name": "[DEPRECATED] NUT - Processo Seletivo 2019/2",
+            "id": "581228"
+        },
+        {
+            "name": "[DEPRECATED] NUT - Processo Seletivo 2020/2",
+            "id": "301410795"
+        },
+        {
+            "name": "[DEPRECATED] NUT - Processo Seletivo 2021/1",
+            "id": "301533270"
+        },
+        {
+            "name": "[DEPRECATED] NUT - Processo Seletivo 2020/1",
+            "id": "1232508"
+        },
+        {
+            "name": "[DEPRECATED] NUT - Acompanhamento Trainee - 2021/1",
+            "id": "301590422"
+        },
+        {
+            "name": "NUT - Processo Seletivo 2021/2",
+            "id": "301725038"
+        },
+        {
+            "name": "NUT - Acompanhamento trainees - 2021/2",
+            "id": "301802281"
+        },
+        {
+            "name": "NUT - Respostas padrinhos - 2021/2",
+            "id": "301802284"
+        },
+        {
+            "name": "NUT - Respostas trainees - 2021/2",
+            "id": "301809727"
+        }
+    ]
+}
