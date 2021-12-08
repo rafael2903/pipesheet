@@ -10,7 +10,7 @@ const pipeNotAvailable = (pipeId) => {
 
 const handler = base()
   .post(async (req, res) => {
-    const { pipeId, spreadsheetId, sheetId, title } = req.body
+    const { pipeId, spreadsheetId, sheetId, title, columns } = req.body
 
     if (pipeNotAvailable(pipeId))
       res
@@ -25,6 +25,7 @@ const handler = base()
         spreadsheetId,
         sheetId,
         title,
+        columns
       })
 
       await api.post('/synchronize')
