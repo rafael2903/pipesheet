@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Select, Button } from 'components'
 import notyf from 'config/notyf'
 
-export default function PageName({ nextStep, previousStep, data, setData }) {
+export function PageName({ nextStep, previousStep, data, setData }) {
   const { sheets } = data
   const [sheetId, setSheetId] = useState(data.sheetId || sheets[0]?.value)
 

@@ -1,4 +1,4 @@
-export default function Checkbox({ name, checked, onChange, label }) {
+export function Checkbox({ name, checked, onChange, label }) {
   return (
     <label className='w-full text-left text-gray-600 text-sm flex items-start leading-4 py-1 gap-1'>
       <input

@@ -6,12 +6,7 @@ import api from 'config/api'
 import notyf from 'config/notyf'
 import { Button, TextInput } from 'components'
 
-export default function SpreadsheetId({
-  nextStep,
-  previousStep,
-  data,
-  setData,
-}) {
+export function SpreadsheetId({ nextStep, previousStep, data, setData }) {
   const [spreadsheetId, setSpreadsheetId] = useState(data.spreadsheetId)
   const [isLoading, setIsLoading] = useState(false)
 

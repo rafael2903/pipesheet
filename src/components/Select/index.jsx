@@ -3,7 +3,7 @@ import Fuse from 'fuse.js'
 import styles from './styles.module.css'
 import { IoMdArrowDropdown } from 'react-icons/io'
 
-export default function Select({ ...rest }) {
+export function Select({ ...rest }) {
   function fuzzySearch(options) {
     const fuse = new Fuse(options, {
       keys: ['name', 'groupName', 'items.name'],

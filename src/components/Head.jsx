@@ -1,6 +1,6 @@
 import NextHead from 'next/head'
 
-export default function Head() {
+export function Head() {
   return (
     <NextHead>
       <title>PipeSheet</title>

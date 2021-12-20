@@ -4,7 +4,7 @@ import api from 'config/api'
 import notyf from 'config/notyf'
 import Spinner from 'react-spinner-material'
 
-export default function Summary({
+export function Summary({
   data,
   setData,
   previousStep,

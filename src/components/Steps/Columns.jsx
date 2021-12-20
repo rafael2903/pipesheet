@@ -3,7 +3,7 @@ import { Button, Checkbox } from 'components'
 import notyf from 'config/notyf'
 import styles from './styles.module.css'
 
-export default function Columns({ nextStep, previousStep, data, setData }) {
+export function Columns({ nextStep, previousStep, data, setData }) {
   const [columns, setColumns] = useState([
     { name: 'id', value: Boolean(data.columns?.id), label: 'Id' },
     { name: 'title', value: Boolean(data.columns?.title), label: 'Título' },

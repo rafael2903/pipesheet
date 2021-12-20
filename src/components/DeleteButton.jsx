@@ -3,7 +3,7 @@ import Spinner from 'react-spinner-material'
 import { MdOutlineClose } from 'react-icons/md'
 import api from 'config/api'
 
-export default function DeleteButton(id, setData) {
+export function DeleteButton(id, setData) {
   const [loading, setLoading] = useState(false)
 
   async function deleteIntegration() {

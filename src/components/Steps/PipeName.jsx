@@ -5,7 +5,7 @@ import notyf from 'config/notyf'
 import api from 'config/api'
 import Spinner from 'react-spinner-material'
 
-export default function PipeName({ nextStep, previousStep, data, setData }) {
+export function PipeName({ nextStep, previousStep, data, setData }) {
   const [pipeId, setPipeId] = useState(data.pipeId)
   const [pipes, setPipes] = useState([])
   const [isLoading, setIsLoading] = useState(false)
